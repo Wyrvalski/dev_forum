@@ -1,3 +1,4 @@
 {
-    "mongoURI": "mongodb+srv://wyrvalski:Casa@2417@cluster0-gnova.mongodb.net/test?retryWrites=true&w=majority"
+    "mongoURI": "mongodb+srv://wyrvalski:Casa@2417@cluster0-gnova.mongodb.net/test?retryWrites=true&w=majority",
+    "jwtSecret": "mysecrettoken"
 }
