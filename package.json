@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node server",
     "server": "nodemon server",
-    "test": "NODE_ENV= jest --detectOpenHandles --coverage"
+    "test": "NODE_ENV= jest --detectOpenHandles"
   },
   "repository": {
     "type": "git",
