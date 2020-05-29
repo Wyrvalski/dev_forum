@@ -1,4 +1,6 @@
 {
     "mongoURI": "mongodb+srv://wyrvalski:Casa@2417@cluster0-gnova.mongodb.net/test?retryWrites=true&w=majority",
-    "jwtSecret": "mysecrettoken"
+    "jwtSecret": "mysecrettoken",
+    "githubClientId": "94236bee2f75965e8b90",
+    "githubSecret": "e199d65ca6115bdffa71d171fc6908cb72bf5b03"
 }
