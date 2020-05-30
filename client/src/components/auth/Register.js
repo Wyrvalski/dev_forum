@@ -1,6 +1,12 @@
 import React, { Fragment, useState } from 'react';
+import { Link, Redirect } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { register } from '../../actions/auth';
+import { setAlert } from '../../actions/alert';
+import PropTypes from 'prop-types';
 
-const Register = () => {
+
+const Register = ({ setAlert, register, isAuthenticated }) => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -13,23 +19,30 @@ const Register = () => {
   const onChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
 
-  const onSubmit = (e) => {
-      e.preventDefault();
-      if (password !== password2) {
-        console.log('Password incorret');
-      } else {
-          console.log(formData);
-          
-      }
+  const onSubmit = async (e) => {
+    e.preventDefault();
+    if (password !== password2) {
+      setAlert('Password do not match', 'danger');
+    } else {
+      register({ name, email, password });
+    }
+  };
+
+  if(isAuthenticated) {
+    return <Redirect to='/dashboard' />
   }
-  
+
   return (
     <Fragment>
       <h1 className='large text-primary'>Sign Up</h1>
       <p className='lead'>
         <i className='fas fa-user'></i> Create Your Account
       </p>
-      <form action='dashboard.html' className='form' onSubmit={e => onSubmit(e)}>
+      <form
+        action='dashboard.html'
+        className='form'
+        onSubmit={(e) => onSubmit(e)}
+      >
         <div className='form-group'>
           <input
             name='name'
@@ -37,7 +50,6 @@ const Register = () => {
             value={name}
             type='text'
             placeholder='Name'
-            required
           />
         </div>
         <div className='form-group'>
@@ -60,7 +72,6 @@ const Register = () => {
             value={password}
             type='password'
             placeholder='Password'
-            minlength='6'
           />
         </div>
         <div className='form-group'>
@@ -70,16 +81,25 @@ const Register = () => {
             value={password2}
             type='password'
             placeholder='Confirm Password'
-            minlength='6'
           />
         </div>
         <input type='submit' value='Register' className='btn btn-primary' />
       </form>
       <p className='my-1'>
-        Already have an account? <a href='login.html'>Sign In</a>
+        Already have an account? <Link to='/login'>Sign In</Link>
       </p>
     </Fragment>
   );
 };
 
-export default Register;
+const mapStateToProps = state => ({
+  isAuthenticated: state.auth.isAuthenticated
+});
+
+Register.propTypes = {
+  setAlert: PropTypes.func.isRequired,
+  register: PropTypes.func.isRequired,
+  isAuthenticated: PropTypes.bool
+};
+
+export default connect(mapStateToProps, { setAlert, register })(Register);
