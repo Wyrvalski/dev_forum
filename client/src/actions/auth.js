@@ -4,7 +4,8 @@ import {
   USER_LOADED,
   AUTH_ERROR,
   LOGGED_SUCCESS,
-  LOGGED_FAIL
+  LOGGED_FAIL,
+  LOGOUT
 } from './types';
 import { setAlert } from './alert';
 import axios from 'axios';
@@ -58,7 +59,7 @@ export const register = ({ name, email, password }) => async (dispatch) => {
   }
 };
 
-export const login = ( email, password ) => async (dispatch) => {
+export const login = (email, password) => async (dispatch) => {
   const config = {
     headers: {
       'Content-Type': 'application/json',
@@ -87,4 +88,6 @@ export const login = ( email, password ) => async (dispatch) => {
   }
 };
 
-
+export const logout = () => (dispatch) => {
+  dispatch({ type: LOGOUT });
+};

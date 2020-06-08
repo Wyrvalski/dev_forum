@@ -7,36 +7,40 @@ import Register from './components/auth/Register';
 import Login from './components/auth/Login';
 import { Provider } from 'react-redux';
 import store from './store';
-import Alert from './components/layout/Alert'
+import Alert from './components/layout/Alert';
 import setAuthToken from './utils/setAuthToken';
 import { loadUser } from './actions/auth';
+import Dashboard from './components/dashboard/Dashboard';
+import PrivateRoute from './components/routing/PrivateRoute'
 
 if (localStorage.token) {
   setAuthToken(localStorage.token);
 }
 
 const App = () => {
-  
   useEffect(() => {
     store.dispatch(loadUser);
-  }, [])
+  }, []);
 
-  return(
-  <Provider store={store}>
-    <Router>
-      <Fragment>
-        <Navbar />
-        <Route exact path='/' component={Landing} />
-        <section className='container'>
+  return (
+    <Provider store={store}>
+      <Router>
+        <Fragment>
+          <Navbar />
           <Alert />
-          <Switch>
-            <Route path='/register' component={Register} />
-            <Route path='/login' component={Login} />
-          </Switch>
-        </section>
-      </Fragment>
-    </Router>
-  </Provider>
-)};
+          <Route exact path='/' component={Landing} />
+          <section className='container'>
+            <Alert />
+            <Switch>
+              <Route path='/register' component={Register} />
+              <Route path='/login' component={Login} />
+              <PrivateRoute path='/dashboard' component={Dashboard} />
+            </Switch>
+          </section>
+        </Fragment>
+      </Router>
+    </Provider>
+  );
+};
 
 export default App;
