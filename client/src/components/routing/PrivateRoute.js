@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
@@ -10,18 +11,17 @@ const PrivateRoute = ({
 }) => (
   <Route
     {...rest}
-    render={(props) =>
-      !isAuthenticated && !loading ? (
-        <Redirect to='/login' />
-      ) : (
-        <Component {...props} />
-      )
-    }
+    render={(props) => (!isAuthenticated && !loading ? (
+      <Redirect to="/login" />
+    ) : (
+      <Component {...props} />
+    ))}
   />
 );
 
 PrivateRoute.propTypes = {
-  auth: PropTypes.object.isRequired,
+  auth: PropTypes.instanceOf(Object).isRequired,
+  component: PropTypes.instanceOf(Object).isRequired,
 };
 
 const mapStateToProps = (state) => ({

@@ -1,10 +1,10 @@
-import React, { Fragment, useState } from 'react';
+/* eslint-disable no-shadow */
+import React, { useState } from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import { register } from '../../actions/auth';
 import { setAlert } from '../../actions/alert';
-import PropTypes from 'prop-types';
-
 
 const Register = ({ setAlert, register, isAuthenticated }) => {
   const [formData, setFormData] = useState({
@@ -14,10 +14,11 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
     password2: '',
   });
 
-  const { name, email, password, password2 } = formData;
+  const {
+    name, email, password, password2,
+  } = formData;
 
-  const onChange = (e) =>
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+  const onChange = (e) => setFormData({ ...formData, [e.target.name]: e.target.value });
 
   const onSubmit = async (e) => {
     e.preventDefault();
@@ -28,78 +29,82 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
     }
   };
 
-  if(isAuthenticated) {
-    return <Redirect to='/dashboard' />
+  if (isAuthenticated) {
+    return <Redirect to="/dashboard" />;
   }
 
   return (
-    <Fragment>
-      <h1 className='large text-primary'>Sign Up</h1>
-      <p className='lead'>
-        <i className='fas fa-user'></i> Create Your Account
+    <>
+      <h1 className="large text-primary">Sign Up</h1>
+      <p className="lead">
+        <i className="fas fa-user" />
+        {' '}
+        Create Your Account
       </p>
       <form
-        action='dashboard.html'
-        className='form'
+        action="dashboard.html"
+        className="form"
         onSubmit={(e) => onSubmit(e)}
       >
-        <div className='form-group'>
+        <div className="form-group">
           <input
-            name='name'
+            name="name"
             onChange={(e) => onChange(e)}
             value={name}
-            type='text'
-            placeholder='Name'
+            type="text"
+            placeholder="Name"
           />
         </div>
-        <div className='form-group'>
+        <div className="form-group">
           <input
             onChange={(e) => onChange(e)}
-            name='email'
+            name="email"
             value={email}
-            type='email'
-            placeholder='Email Address'
+            type="email"
+            placeholder="Email Address"
           />
-          <small className='form-text'>
+          <small className="form-text">
             This site uses Gravatar, so if you want a profile image, use a
             Gravatar email
           </small>
         </div>
-        <div className='form-group'>
+        <div className="form-group">
           <input
             onChange={(e) => onChange(e)}
-            name='password'
+            name="password"
             value={password}
-            type='password'
-            placeholder='Password'
+            type="password"
+            placeholder="Password"
           />
         </div>
-        <div className='form-group'>
+        <div className="form-group">
           <input
             onChange={(e) => onChange(e)}
-            name='password2'
+            name="password2"
             value={password2}
-            type='password'
-            placeholder='Confirm Password'
+            type="password"
+            placeholder="Confirm Password"
           />
         </div>
-        <input type='submit' value='Register' className='btn btn-primary' />
+        <input type="submit" value="Register" className="btn btn-primary" />
       </form>
-      <p className='my-1'>
-        Already have an account? <Link to='/login'>Sign In</Link>
+      <p className="my-1">
+        Already have an account?
+        {' '}
+        <Link to="/login">Sign In</Link>
       </p>
-    </Fragment>
+    </>
   );
 };
 
-const mapStateToProps = state => ({
-  isAuthenticated: state.auth.isAuthenticated
+const mapStateToProps = (state) => ({
+  isAuthenticated: state.auth.isAuthenticated,
 });
 
 Register.propTypes = {
   setAlert: PropTypes.func.isRequired,
   register: PropTypes.func.isRequired,
-  isAuthenticated: PropTypes.bool
+  isAuthenticated: PropTypes.bool.isRequired,
 };
 
 export default connect(mapStateToProps, { setAlert, register })(Register);
