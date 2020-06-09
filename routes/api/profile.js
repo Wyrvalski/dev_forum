@@ -52,7 +52,7 @@ router.post(
       instagram,
       linkedin
     } = req.body;
-
+    
     const profileFields = {};
     profileFields.user = req.user.id;
     if (company) profileFields.company = company;
@@ -62,11 +62,10 @@ router.post(
     if (status) profileFields.status = status;
     if (githubusername) profileFields.githubusername = githubusername;
     if (skills) {
-      Array.isArray(profileFields.skills)
-        ? (profileFields.skills = skills
-            .split(',')
-            .map((skill) => skill.trim()))
-        : (profileFields.skills = skills);
+      Array.isArray(skills)
+        ? profileFields.skills = skills
+        : profileFields.skills = skills.split(',')
+        .map((skill) => skill.trim());
     }
 
     profileFields.social = {};
@@ -99,7 +98,7 @@ router.post(
   }
 );
 
-router.get('/', auth, async (req, res) => {
+router.get('/', async (req, res) => {
   try {
     const profiles = await Profile.find().populate('user', ['name', 'avatar']);
     res.json(profiles);
