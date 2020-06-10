@@ -4,7 +4,11 @@ import {
   POST_ERROR,
   UPDATE_LIKES,
   DELETE_POST,
-  ADD_POST
+  ADD_POST,
+  GET_POST,
+  CLEAR_POST,
+  ADD_COMMENT,
+  REMOVE_COMMENT
 } from '../actions/types';
 import { setAlert } from './alert';
 
@@ -16,6 +20,8 @@ export const getPosts = () => async (dispatch) => {
       type: GET_POSTS,
       payload: res.data
     });
+
+    dispatch({ type: CLEAR_POST })
   } catch (err) {
     dispatch({
       type: POST_ERROR,
@@ -89,6 +95,73 @@ export const addPost = (formData) => async (dispatch) => {
     });
 
     dispatch(setAlert('Post Criado', 'success'));
+  } catch (err) {
+    dispatch({
+      type: POST_ERROR,
+      payload: { msg: err.response.statusText, status: err.response.status }
+    });
+  }
+};
+
+export const getPost = id => async (dispatch) => {
+  try {
+    const res = await axios.get(`/api/posts/${id}`);
+
+    dispatch({
+      type: GET_POST,
+      payload: res.data
+    });
+
+  } catch (err) {
+    dispatch({
+      type: POST_ERROR,
+      payload: { msg: err.response.statusText, status: err.response.status }
+    });
+  }
+};
+
+export const addComment = (postId, formData) => async (dispatch) => {
+  
+  const config = {
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  };
+
+  try {
+    const res = await axios.post(`/api/posts/comment/${postId}`, formData, config);
+    
+    dispatch({
+      type: ADD_COMMENT,
+      payload: res.data
+    });
+
+    dispatch(setAlert('Comentado', 'success'));
+  } catch (err) {
+    dispatch({
+      type: POST_ERROR,
+      payload: { msg: err.response.statusText, status: err.response.status }
+    });
+  }
+};
+
+export const deleteComment = (postId, commentId) => async (dispatch) => {
+  
+  const config = {
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  };
+
+  try {
+    const res = await axios.delete(`/api/posts/comment/${postId}/${commentId}`);
+    
+    dispatch({
+      type: REMOVE_COMMENT,
+      payload: commentId
+    });
+
+    dispatch(setAlert('Comentario removido', 'success'));
   } catch (err) {
     dispatch({
       type: POST_ERROR,
