@@ -5,6 +5,7 @@ import Spinner from '../layout/Spinner';
 import { connect } from 'react-redux';
 import { getPosts } from '../../actions/post';
 import PostItem from './PostItem';
+import PostForm from './PostForm';
 
 const Posts = ({ getPosts, post: { posts, loading } }) => {
   useEffect(() => {
@@ -16,11 +17,13 @@ const Posts = ({ getPosts, post: { posts, loading } }) => {
   ) : (
     <Fragment>
       <Link to='/posts' className='btn'>
-        Back To Posts
       </Link>
-      {posts.map((post) => (
-        <PostItem post={post} showActions={false} />
-      ))}
+      <PostForm />
+      <div className='posts'>
+        {posts.map((post) => (
+          <PostItem post={post} showActions={false} />
+        ))}
+      </div>
     </Fragment>
   );
 };
