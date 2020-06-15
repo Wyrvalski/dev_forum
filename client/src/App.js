@@ -1,25 +1,27 @@
 import React, { useEffect } from 'react';
-import './App.css';
+import './css/reset.css';
+import './css/normalize.css'
+import './App.css'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { Provider } from 'react-redux';
-import Navbar from './components/layout/Navbar';
-import Landing from './components/layout/Landing';
-import Register from './components/auth/Register';
-import Login from './components/auth/Login';
+import Navbar from './components/layout/navbar';
+import Landing from './components/layout/landing';
+import Register from './components/auth/register';
+import Login from './components/auth/login';
 import store from './store';
-import Alert from './components/layout/Alert';
+import Alert from './components/layout/alert';
 import setAuthToken from './utils/setAuthToken';
 import { loadUser } from './actions/auth';
-import Dashboard from './components/dashboard/Dashboard';
+import Dashboard from './components/dashboard/dashboard';
 import PrivateRoute from './components/routing/PrivateRoute';
-import AddExperience from './components/profile-forms/AddExperience';
-import AddEducation from './components/profile-forms/AddEducation'
-import Profiles from './components/profiles/Profiles'
-import Profile from './components/profile/Profile'
-import ProfileForm from './components/profile-forms/ProfileForm';
-import EditProfile from './components/profile-forms/EditProfile';
-import Posts from './components/posts/Posts'
-import Post from './components/post/Post'
+import AddExperience from './components/profile-forms/add_experience';
+import AddEducation from './components/profile-forms/add_education'
+import Profiles from './components/profiles/profile'
+import Profile from './components/profile/profile'
+import ProfileForm from './components/profile-forms/profile_form';
+import EditProfile from './components/profile-forms/edit_profile';
+import Posts from './components/posts/posts'
+import Post from './components/post/post'
 
 if (localStorage.token) {
   setAuthToken(localStorage.token);
@@ -38,7 +40,6 @@ const App = () => {
           <Alert />
           <Route exact path='/' component={Landing} />
           <section className='container'>
-            <Alert />
             <Switch>
               <Route exact path='/register' component={Register} />
               <Route exact path='/login' component={Login} />
