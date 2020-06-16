@@ -15,12 +15,10 @@ export const Table = styled.table`
   td {
     text-align: center;
     button {
-      background:red;
+      background: red;
       border-radius: 5px;
     }
   }
-
-  width: 500px;
 `;
 
 export const Container = styled.div`

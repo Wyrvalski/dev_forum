@@ -8,6 +8,7 @@ import { setAlert } from '../../../actions/alert';
 import ContainerLoginCadastro from '../../layout/container_cadastro_login';
 import Input from '../../layout/input';
 import Button from '../../layout/input_button';
+// import { Small } from './style';
 
 const Register = ({ setAlert, register, isAuthenticated }) => {
   const [formData, setFormData] = useState({

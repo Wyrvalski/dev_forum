@@ -35,10 +35,11 @@ export const Nav = styled.nav`
     background-color: #819ff7;
     min-height: 70px;
     box-shadow: black 3px 3px 3px;
-    min-width: 360px;
+    min-width: 300px;
 
     h1 {
       margin: 0 auto;
+      padding:10px;
     }
   }
 
@@ -129,7 +130,7 @@ export const NavBar = styled.ul`
     margin: 0;
     height: 100%;
     width: 90%;
-    max-width: 320px;
+    max-width: 300px;
     position: fixed;
     z-index: 1;
     top: 0;

@@ -1,7 +1,6 @@
 /* eslint-disable react/forbid-prop-types */
 /* eslint-disable no-shadow */
 import React, { useState } from 'react';
-import './css/style.css';
 import { Nav, MenuOpen, MenuClose, Ul, NavBar } from './style';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';

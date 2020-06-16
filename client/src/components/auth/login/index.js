@@ -9,6 +9,7 @@ import ContainerLoginCadastro from '../../layout/container_cadastro_login';
 import Input from '../../layout/input';
 import Button from '../../layout/input_button';
 
+
 const Login = ({ login, isAuthenticated }) => {
   const [formData, setFormData] = useState({
     email: '',
@@ -33,12 +34,9 @@ const Login = ({ login, isAuthenticated }) => {
     <ContainerLoginCadastro>
       <h1>Login</h1>
       <p>
-        <i/> Entrar na conta
+        <i /> Entrar na conta
       </p>
-      <form
-        action='/dashboard'
-        onSubmit={(e) => onSubmit(e)}
-      >
+      <form action='/dashboard' onSubmit={(e) => onSubmit(e)}>
         <div>
           <Input
             type='email'
